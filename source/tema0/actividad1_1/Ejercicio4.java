@@ -33,6 +33,9 @@ public class Ejercicio4 {
             } else if (pesoRatas.get(i) != pesoRatas.get(i + 1)) {
                 System.out.println("Hay " + cantidad + " ratas que pesan " + pesoRatas.get(i) + " g.");
                 cantidad = 1;
+                if (i+1==numRatas-1) {
+                    System.out.println("Hay " + cantidad + " ratas que pesan " + pesoRatas.get(i+1) + " g.");
+                }
             }
         }
 

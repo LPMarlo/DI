@@ -1,5 +1,8 @@
 package tema0.actividad1_2;
 
+/**
+ * @author Marlo Lebrón Pareja
+ */
 public class Punto implements IPunto{
 
     private double x;
@@ -18,7 +21,7 @@ public class Punto implements IPunto{
         return y;
     }
 
-    public double distanciaEuclidea(Punto p) {
+    public double distanciaEuclidea(IPunto p) {
         double dE = Math.sqrt(Math.pow(p.getX()-this.x,2)+Math.pow(p.getY()-this.y,2));
         return dE;
     }

@@ -2,6 +2,9 @@ package tema0.actividad1_2;
 
 import java.util.Scanner;
 
+/**
+ * @author Marlo Lebrón Pareja
+ */
 public class main {
 
     private static Scanner teclado = new Scanner(System.in);
@@ -14,13 +17,16 @@ public class main {
         System.out.println("Introduce el valor de y1: ");
         double y1 = teclado.nextInt();
 
+        Punto p1 = new Punto(x1,y1);
+
         System.out.println("Introduce el valor de x2: ");
         double x2 = teclado.nextInt();
 
         System.out.println("Introduce el valor de y2: ");
         double y2 = teclado.nextInt();
 
-        double dE = Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
-        System.out.println("Distancia euclídea: "+dE);
+        Punto p2 = new Punto(x2,y2);
+
+        System.out.println("Distancia euclídea: "+p1.distanciaEuclidea(p2));
     }
 }
