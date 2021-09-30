@@ -5,6 +5,18 @@ public class TarjetaVirtual extends TarjetaBancaria implements ITarjetaVirtual{
     private int pin;
     private double monedero;
 
+    public TarjetaVirtual(double monedero) {
+        this.monedero = monedero;
+    }
+
+    public void recargarMonedero(double cantidad) {
+        this.monedero += cantidad;
+    }
+    public boolean compra(double cantidad) {
+        return false;
+    }
+
+
     @Override
     public String getTitular() {
         return null;
@@ -12,26 +24,25 @@ public class TarjetaVirtual extends TarjetaBancaria implements ITarjetaVirtual{
 
     @Override
     public String getNumero() {
-        return null;
+        return super.getNumero();
     }
 
     @Override
     public IFechaDeCaducidad getFechaDeCaducidad() {
-        return null;
+        return super.getFechaDeCaducidad();
     }
 
     @Override
     public ICuentaCorriente getCuentaCorriente() {
-        return null;
+        return super.getCuentaCorriente();
     }
 
     @Override
     public double getLimite() {
-        return 0;
+        return super.getLimite();
     }
 
-    @Override
-    public boolean compra(double cantidad) {
-        return false;
-    }
+
+
+
 }
