@@ -4,15 +4,16 @@ public class CuentaCorriente implements ICuentaCorriente {
 
     private String numero;
     private double saldo;
+    private String titular;
 
     @Override
     public void abono(double cantidad) {
-
+        this.saldo += cantidad;
     }
 
     @Override
     public void cargo(double cantidad) {
-
+        this.saldo -= cantidad;
     }
 
     @Override
@@ -27,6 +28,6 @@ public class CuentaCorriente implements ICuentaCorriente {
 
     @Override
     public String getTitular() {
-        return null;
+        return this.titular;
     }
 }
