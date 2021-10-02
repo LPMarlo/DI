@@ -4,11 +4,12 @@ public class TarjetaBancaria implements ITarjetaBancaria {
 
     private String titular;
     private double limite;
-    private IFechaDeCaducidad fechaDeCaducidad;
-    private ICuentaCorriente cuentaCorriente;
+    private FechaDeCaducidad fechaDeCaducidad;
+    private CuentaCorriente cuentaCorriente;
 
-    public TarjetaBancaria(String titular, double limite, IFechaDeCaducidad fechaDeCaducidad, ICuentaCorriente cuentaCorriente) {
-        this.titular = titular;
+
+    public TarjetaBancaria( double limite, FechaDeCaducidad fechaDeCaducidad, CuentaCorriente cuentaCorriente) {
+        this.titular = cuentaCorriente.getTitular();
         this.limite = limite;
         this.fechaDeCaducidad = fechaDeCaducidad;
         this.cuentaCorriente = cuentaCorriente;
@@ -36,12 +37,12 @@ public class TarjetaBancaria implements ITarjetaBancaria {
 
     @Override
     public IFechaDeCaducidad getFechaDeCaducidad() {
-        return null;
+        return this.fechaDeCaducidad;
     }
 
     @Override
     public ICuentaCorriente getCuentaCorriente() {
-        return null;
+        return this.cuentaCorriente;
     }
 
     @Override

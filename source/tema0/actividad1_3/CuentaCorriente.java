@@ -6,6 +6,12 @@ public class CuentaCorriente implements ICuentaCorriente {
     private double saldo;
     private String titular;
 
+    public CuentaCorriente(String numero, double saldo, String titular) {
+        this.numero = numero;
+        this.saldo = saldo;
+        this.titular = titular;
+    }
+
     @Override
     public void abono(double cantidad) {
         this.saldo += cantidad;
@@ -23,7 +29,7 @@ public class CuentaCorriente implements ICuentaCorriente {
 
     @Override
     public double getSaldo() {
-        return 0;
+        return this.saldo;
     }
 
     @Override

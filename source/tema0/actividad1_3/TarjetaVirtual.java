@@ -7,10 +7,14 @@ public class TarjetaVirtual extends TarjetaBancaria implements ITarjetaVirtual{
     private int pin;
     private double monedero;
 
-    public TarjetaVirtual(double monedero, int pin, double limite, IFechaDeCaducidad fechaDeCaducidad, ICuentaCorriente cuentaCorriente) {
-        super(cuentaCorriente.getTitular(), limite, fechaDeCaducidad, cuentaCorriente);
+    public TarjetaVirtual( int pin, double limite, FechaDeCaducidad fechaDeCaducidad, CuentaCorriente cuentaCorriente) {
+        super(limite, fechaDeCaducidad, cuentaCorriente);
         this.monedero = 0;
         this.pin = pin;
+    }
+
+    public double getMonedero() {
+        return monedero;
     }
 
     public void recargarMonedero(double cantidad, int pin) {
@@ -24,8 +28,8 @@ public class TarjetaVirtual extends TarjetaBancaria implements ITarjetaVirtual{
     public boolean compra(double cantidad) {
         boolean compra = false;
         if (comprobarPin(pin)==true) {
-            if (this.monedero>=cantidad) {
-                this.monedero -= cantidad;
+            if (this.monedero>=cantidad ) {
+                this.monedero-=cantidad;
                 compra = true;
             }
         }
@@ -37,7 +41,6 @@ public class TarjetaVirtual extends TarjetaBancaria implements ITarjetaVirtual{
         if (this.pin==pin) {
             this.pin = newPin;
         }
-        this.pin = pin;
     }
 
     private boolean comprobarPin(int pin) {
@@ -49,7 +52,7 @@ public class TarjetaVirtual extends TarjetaBancaria implements ITarjetaVirtual{
     }
 
     public String getTitular() {
-        return null;
+        return super.getTitular();
     }
 
     public String getNumero() {
