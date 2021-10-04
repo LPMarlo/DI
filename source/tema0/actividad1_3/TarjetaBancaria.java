@@ -2,14 +2,14 @@ package tema0.actividad1_3;
 
 public class TarjetaBancaria implements ITarjetaBancaria {
 
-    private String titular;
     private double limite;
-    private FechaDeCaducidad fechaDeCaducidad;
-    private CuentaCorriente cuentaCorriente;
+    private String numero;
+    private IFechaDeCaducidad fechaDeCaducidad;
+    private ICuentaCorriente cuentaCorriente;
 
 
-    public TarjetaBancaria( double limite, FechaDeCaducidad fechaDeCaducidad, CuentaCorriente cuentaCorriente) {
-        this.titular = cuentaCorriente.getTitular();
+    public TarjetaBancaria(String numero, double limite, FechaDeCaducidad fechaDeCaducidad, CuentaCorriente cuentaCorriente) {
+        this.numero = numero;
         this.limite = limite;
         this.fechaDeCaducidad = fechaDeCaducidad;
         this.cuentaCorriente = cuentaCorriente;
@@ -18,7 +18,7 @@ public class TarjetaBancaria implements ITarjetaBancaria {
 
     public boolean sacarDinero(double cantidad) {
         boolean hecho=false;
-        if (cuentaCorriente.getSaldo() >= cantidad) {
+        if (cuentaCorriente.getSaldo() >= cantidad && this.limite<=cantidad) {
             cuentaCorriente.cargo(cantidad);
             hecho =true;
         }
@@ -27,12 +27,11 @@ public class TarjetaBancaria implements ITarjetaBancaria {
 
     @Override
     public String getTitular() {
-        return this.titular;
+        return this.cuentaCorriente.getTitular();
     }
 
-    @Override
     public String getNumero() {
-        return null;
+        return this.numero;
     }
 
     @Override
