@@ -5,7 +5,7 @@ public class FechaDeCaducidad implements IFechaDeCaducidad {
     private int ano;
     private int mes;
 
-    public FechaDeCaducidad(int ano, int mes) {
+    public FechaDeCaducidad(int mes, int ano) {
         this.ano = ano;
         this.mes = mes;
     }
@@ -21,6 +21,6 @@ public class FechaDeCaducidad implements IFechaDeCaducidad {
 
     @Override
     public String toString() {
-        return  ano + "/" + mes;
+        return mes + "/" + ano;
     }
 }

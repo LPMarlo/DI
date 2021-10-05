@@ -7,25 +7,23 @@ public class TarjetaBancaria implements ITarjetaBancaria {
     private IFechaDeCaducidad fechaDeCaducidad;
     private ICuentaCorriente cuentaCorriente;
 
-
-    public TarjetaBancaria(String numero, double limite, FechaDeCaducidad fechaDeCaducidad, CuentaCorriente cuentaCorriente) {
+    //CONSTRUCTOR
+    public TarjetaBancaria(String numero, double limite, IFechaDeCaducidad fechaDeCaducidad, ICuentaCorriente cuentaCorriente) {
         this.numero = numero;
         this.limite = limite;
         this.fechaDeCaducidad = fechaDeCaducidad;
         this.cuentaCorriente = cuentaCorriente;
     }
 
-
-    public boolean sacarDinero(double cantidad) {
-        boolean hecho=false;
-        if (cuentaCorriente.getSaldo() >= cantidad && this.limite<=cantidad) {
+    public boolean compra(double cantidad) {
+        boolean compra = false;
+        if (cuentaCorriente.getSaldo() >= cantidad && this.limite >= cantidad) { //Comprueba la disponibilidad y controla el limite establecido
             cuentaCorriente.cargo(cantidad);
-            hecho =true;
+            compra = true;
         }
-        return hecho;
+        return compra;
     }
 
-    @Override
     public String getTitular() {
         return this.cuentaCorriente.getTitular();
     }
@@ -34,28 +32,16 @@ public class TarjetaBancaria implements ITarjetaBancaria {
         return this.numero;
     }
 
-    @Override
     public IFechaDeCaducidad getFechaDeCaducidad() {
         return this.fechaDeCaducidad;
     }
 
-    @Override
     public ICuentaCorriente getCuentaCorriente() {
         return this.cuentaCorriente;
     }
 
-    @Override
     public double getLimite() {
-        return 0;
+        return this.limite;
     }
 
-    @Override
-    public boolean compra(double cantidad) {
-        boolean compra = false;
-        if (cuentaCorriente.getSaldo()>=cantidad) {
-            cuentaCorriente.cargo(cantidad);
-            compra = true;
-        }
-        return compra;
-    }
 }

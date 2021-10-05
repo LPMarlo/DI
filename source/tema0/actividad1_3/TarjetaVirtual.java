@@ -2,13 +2,13 @@ package tema0.actividad1_3;
 
 import java.util.Scanner;
 
-public class TarjetaVirtual extends TarjetaBancaria implements ITarjetaVirtual{
+public class TarjetaVirtual extends TarjetaBancaria implements ITarjetaVirtual {
 
     private int pin;
     private double monedero;
 
     public TarjetaVirtual(String numTarjetaBancaria, int pin, double limite, FechaDeCaducidad fechaDeCaducidad, CuentaCorriente cuentaCorriente) {
-        super(numTarjetaBancaria,limite, fechaDeCaducidad, cuentaCorriente);
+        super(numTarjetaBancaria, limite, fechaDeCaducidad, cuentaCorriente);
         this.monedero = 0;
         this.pin = pin;
     }
@@ -18,8 +18,8 @@ public class TarjetaVirtual extends TarjetaBancaria implements ITarjetaVirtual{
     }
 
     public void recargarMonedero(double cantidad, int pin) {
-        if (comprobarPin(pin)==true) {
-            if (super.sacarDinero(cantidad)==true && (this.monedero+cantidad)<=super.getLimite()) {
+        if (comprobarPin(pin) == true) {
+            if (super.compra(cantidad) == true && (this.monedero + cantidad) <= super.getLimite()) { //Utiliza el método compra para restarle la cantidad a la cuenta corriente y controla el límite
                 this.monedero += cantidad;
             }
         }
@@ -27,25 +27,24 @@ public class TarjetaVirtual extends TarjetaBancaria implements ITarjetaVirtual{
 
     public boolean compra(double cantidad) {
         boolean compra = false;
-        if (comprobarPin(pin)==true) {
-            if (this.monedero>=cantidad ) {
-                this.monedero-=cantidad;
+        if (comprobarPin(pin) == true) {
+            if (this.monedero >= cantidad) { //Comprueba si el monedero tiene suficiente dinero
+                this.monedero -= cantidad;
                 compra = true;
             }
         }
-
         return compra;
     }
 
     public void cambiarPin(int pin, int newPin) {
-        if (this.pin==pin) {
+        if (this.pin == pin) {
             this.pin = newPin;
         }
     }
 
     private boolean comprobarPin(int pin) {
-        boolean igual=false;
-        if (this.pin==pin) {
+        boolean igual = false;
+        if (this.pin == pin) {
             igual = true;
         }
         return igual;
@@ -70,8 +69,6 @@ public class TarjetaVirtual extends TarjetaBancaria implements ITarjetaVirtual{
     public double getLimite() {
         return super.getLimite();
     }
-
-
 
 
 }
