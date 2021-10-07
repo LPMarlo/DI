@@ -10,13 +10,13 @@ public abstract class Person {
     private int age;
 
     public Person(String id, String name, String surname, int age) throws PersonException {
-        validateId(id);
+        setId(id);
         this.name = name;
         this.surname = surname;
         validateAge(age);
     }
 
-    private void validateId(String id) throws PersonException{
+    private void setId(String id) throws PersonException{
         if (!(id.length()==9 || Character.isLetter(id.indexOf(8)))) {
             for (int i = 0; i < id.length()-1; i++) {
                 if (!Character.isDigit(id.indexOf(i))) {
@@ -32,11 +32,23 @@ public abstract class Person {
         this.age = age;
     }
 
+    public boolean validateId(String id) {
+        return this.id.equals(id);
+    }
+
     @Override
     public String toString() {
         return "ID: " + id +
                 "; Name: " + name +
                 "; Surname: " + surname +
                 "; Age: " + age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 }

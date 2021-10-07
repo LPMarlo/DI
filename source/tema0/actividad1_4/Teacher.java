@@ -16,4 +16,8 @@ public class Teacher extends Person{
     public boolean addStudent(Student student) {
         return studentsList.add(student);
     }
+
+    public String toString() {
+        return super.getName() + " " +super.getSurname();
+    }
 }

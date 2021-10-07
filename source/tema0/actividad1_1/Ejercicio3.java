@@ -29,8 +29,8 @@ public class Ejercicio3 {
             if ((b ^ 2 - 4 * a * c) < 0) {
                 System.out.println("Resultado: Número complejo");
             } else {
-                System.out.println("x = " + Math.round((-b + Math.sqrt(b ^ 2 - 4 * a * c)) / (2 * a)));
-                System.out.println("x = " + Math.round((-b - Math.sqrt(b ^ 2 - 4 * a * c)) / (2 * a)));
+                System.out.println("x = " +  Math.round(((-b + Math.sqrt(b ^ 2 - 4 * a * c))*1000) / (2 * a)) / 1000);
+                System.out.println("x = " +  Math.round(((-b - Math.sqrt(b ^ 2 - 4 * a * c))*1000) / (2 * a)) / 1000);
             }
         }
     }
