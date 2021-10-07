@@ -1,7 +1,5 @@
 package tema0.actividad1_4;
 
-import java.sql.Time;
-
 public abstract class Person {
 
     private String id;
@@ -10,13 +8,13 @@ public abstract class Person {
     private int age;
 
     public Person(String id, String name, String surname, int age) throws PersonException {
-        setId(id);
+        checkIdFormat(id);
         this.name = name;
         this.surname = surname;
-        validateAge(age);
+        checkAge(age);
     }
 
-    private void setId(String id) throws PersonException{
+    private void checkIdFormat(String id) throws PersonException{
         if (!(id.length()==9 || Character.isLetter(id.indexOf(8)))) {
             for (int i = 0; i < id.length()-1; i++) {
                 if (!Character.isDigit(id.indexOf(i))) {
@@ -27,12 +25,12 @@ public abstract class Person {
         this.id = id;
     }
 
-    private void validateAge(int age) throws PersonException {
+    private void checkAge(int age) throws PersonException {
         if (age<0) throw new PersonException("Incorrect Age.");
         this.age = age;
     }
 
-    public boolean validateId(String id) {
+    public boolean checkId(String id) {
         return this.id.equals(id);
     }
 
@@ -51,4 +49,22 @@ public abstract class Person {
     public String getSurname() {
         return surname;
     }
+
+    public void setId(String id) {
+        if (checkId(id)) this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+
 }

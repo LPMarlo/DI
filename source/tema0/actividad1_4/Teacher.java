@@ -17,7 +17,19 @@ public class Teacher extends Person{
         return studentsList.add(student);
     }
 
+    public boolean removeStudent(Student student) {
+        return studentsList.remove(student);
+    }
+
+    public ArrayList<Student> getStudentsList() {
+        return studentsList;
+    }
+
     public String toString() {
-        return super.getName() + " " +super.getSurname();
+        return super.toString();
+    }
+
+    public boolean containStudent(Student student) {
+        return studentsList.contains(student);
     }
 }

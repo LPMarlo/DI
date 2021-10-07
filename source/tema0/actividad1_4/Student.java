@@ -5,14 +5,22 @@ import java.util.ArrayList;
 public class Student extends Person {
 
     private String enrollment;
-    private ArrayList<SubjectArea> subjects;
+    private ArrayList<Subject> subjects;
 
 
     public Student(String id, String name, String surname, int age, String enrollment) throws PersonException {
         super(id, name, surname, age);
+        subjects = new ArrayList<>();
     }
 
-    public void addSubject(SubjectArea subject) throws PersonException {
+    public void addSubject(Subject subject) throws PersonException {
          if (!subjects.add(subject)) throw new PersonException("Incorrect Subject.");
+
+         subjects.add(subject);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

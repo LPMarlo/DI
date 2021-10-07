@@ -5,17 +5,28 @@ import java.util.Scanner;
 
 public class menu {
 
-    private static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        ArrayList<Teacher> teachers = new ArrayList<Teacher>();
+        ArrayList<Teacher> teachers = new ArrayList<>();
+        ArrayList<Student> students = new ArrayList<>();
 
-        showMainMenu();
-        System.out.println("Choose a option:");
-        int opt = Integer.parseInt(sc.nextLine());
+        int opt = 0;
 
-        mainMenu(opt, teachers);
+        do {
+            showMainMenu();
+
+            System.out.println("Choose a option:");
+            opt = Integer.parseInt(sc.nextLine());
+
+            mainMenu(opt, teachers, students);
+
+            if (opt < 1 || opt > 9) {
+                System.out.println("Error. Choose a option between 1 and 6 (included).");
+            }
+        } while (opt!=9);
+
 
 
     }
@@ -24,106 +35,324 @@ public class menu {
         System.out.println("Choose a option:");
         System.out.println("1. Add a teacher.");
         System.out.println("2. Add a student.");
-        System.out.println("3. Delete a teacher.");
-        System.out.println("4. Delete a student.");
-        System.out.println("5. Edit student's information.");
-        System.out.println("6. Edit teacher's information.");
+        System.out.println("3. Remove a teacher.");
+        System.out.println("4. Remove a student.");
+        System.out.println("5. Change teacher's information.");
+        System.out.println("6. Change student's information.");
+        System.out.println("7. Teacher information.");
+        System.out.println("8. Student information.");
     }
 
-    private static void mainMenu(int opt, ArrayList<Teacher> teachers) {
+    private static void mainMenu(int opt, ArrayList<Teacher> teachers, ArrayList<Student> students) {
+        String id = "";
+        String name = "";
+        String surname = "";
+        int age = 0;
+        boolean contain = false;
+
         try {
-        switch (opt) {
-            case 1:
-                System.out.println("ID: ");
-                String id = sc.nextLine();
+            switch (opt) {
+                case 1 -> {
+                    System.out.println("ID: ");
+                    id = sc.nextLine();
 
-                System.out.println("Name: ");
-                String name = sc.nextLine();
+                    System.out.println("Name: ");
+                    name = sc.nextLine();
 
-                System.out.println("Surname: ");
-                String surname = sc.nextLine();
+                    System.out.println("Surname: ");
+                    surname = sc.nextLine();
 
-                System.out.println("Age: ");
-                int age = Integer.parseInt(sc.nextLine());
+                    System.out.println("Age: ");
+                    age = Integer.parseInt(sc.nextLine());
 
-                System.out.println("ID: ");
-                String depart = sc.nextLine();
+                    System.out.println("Department: ");
+                    String depart = sc.nextLine();
 
+                    teachers.add(new Teacher(id, name, surname, age, Departament.valueOf(depart)));
+                }
+                case 2 -> {
+                    System.out.println("ID: ");
+                    id = sc.nextLine();
 
-                    teachers.add(new Teacher(id, name, surname, age, Departament.valueOf(depart) ));
+                    System.out.println("Name: ");
+                    name = sc.nextLine();
 
-                break;
+                    System.out.println("Surname: ");
+                    surname = sc.nextLine();
 
-            case 2:
-                System.out.println("ID: ");
-                String id2 = sc.nextLine();
+                    System.out.println("Age: ");
+                    age = Integer.parseInt(sc.nextLine());
 
-                System.out.println("Name: ");
-                String name2 = sc.nextLine();
+                    System.out.println("Enrollment's code: ");
+                    String enrollment = sc.nextLine();
 
-                System.out.println("Surname: ");
-                String surname2 = sc.nextLine();
+                    Student s = new Student(id, name, surname, age, enrollment);
 
-                System.out.println("Age: ");
-                int age2 = Integer.parseInt(sc.nextLine());
+                    System.out.println("How many subjects do you want to add?");
+                    int numSubjects = Integer.parseInt(sc.nextLine());
 
-                System.out.println("Enrollment's code: ");
-                String enrollment = sc.nextLine();
+                    if (numSubjects != 0) {
+                        System.out.println("Subjects: IT, PHISICS, CHEMISTRY, BIOLOGY, LITERATURE, MATHEMATICS, HISTORY");
 
-                Student s = new Student(id2, name2, surname2, age2, enrollment);
+                        for (int i = 0; i < numSubjects; i++) {
+                            String subject = "";
+                            System.out.println("Subject [" + (i + 1) + "]: ");
+                            subject = sc.nextLine();
 
-                System.out.println("How many subjects do you want to add?");
-                int numSubjects = Integer.parseInt(sc.nextLine());
-
-                if (numSubjects!=0) {
-                    System.out.println("Subjects: IT, PHISICS, CHEMISTRY, BIOLOGY, LITERATURE, MATHEMATICS, HISTORY");
-                    for (int i = 0; i < numSubjects; i++) {
-                        System.out.println("Subject ["+(i+1)+"]: ");
-                        s.addSubject(SubjectArea.valueOf(sc.nextLine()));
+                            s.addSubject(Subject.valueOf(subject));
+                        }
                     }
+                    students.add(s);
                 }
-                break;
-            case 3:
-                for (Teacher teacher : teachers) {
-                    System.out.print(teacher.toString() + " ");
-                }
-                System.out.println("Introduce the teacher's ID: ");
-                String id3 = sc.nextLine();
+                case 3 -> {
+                    System.out.println("Introduce the teacher's ID: ");
+                    id = sc.nextLine();
 
-                boolean removed = false;
-                boolean again = false;
-
-                do {
                     for (int i = 0; i < teachers.size(); i++) {
-                        if (teachers.get(i).validateId(id3)) {
-                            removed = teachers.remove(teachers.get(i));
+                        if (teachers.get(i).checkId(id)) {
+                            contain = teachers.remove(teachers.get(i));
                         }
                     }
 
-                    if (removed) {
-                        System.out.println("Teacher deleted.");
+                    if (contain) {
+                        System.out.println("Teacher removed.");
                     } else {
-                        System.out.println("Error. Teacher has not deleted.");
-                        System.out.println("Do you want to try it again?");
-                        again = sc.nextBoolean();
+                        System.out.println("Teacher not removed.");
                     }
-                } while (again);
+                }
+                case 4 -> {
+                    System.out.println("Introduce the student's ID: ");
+                    id = sc.nextLine();
 
-                break;
-            case 4:
+                    for (int i = 0; i < students.size(); i++) {
+                        if (students.get(i).checkId(id)) {
+                            contain = students.remove(students.get(i));
+                        }
+                    }
 
-                break;
-            case 5:
+                    if (contain) {
+                        System.out.println("Student removed.");
+                    } else {
+                        System.out.println("Student not removed.");
+                    }
+                }
+                case 5 -> {
+                    System.out.println("Teacher's ID:");
+                    id = sc.nextLine();
 
-                break;
-            case 6:
+                    for (Teacher teacher : teachers) {
+                        contain = teacher.checkId(id);
+                    }
 
-                break;
-            default:
-                break;
-        }
+                    if (!contain) {
+                        System.out.println("Teacher's ID not found.");
+                    } else {
+                        showTeacherMenu();
+                        teacherMenu(teachers, id);
+                    }
+                }
+                case 6 -> {
+                    System.out.println("Student's ID:");
+                    id = sc.nextLine();
+
+                    for (Student student : students) {
+                        contain = student.checkId(id);
+                    }
+
+                    if (!contain) {
+                        System.out.println("Student's ID not found.");
+                    } else {
+                        showStudentMenu();
+                        studentMenu(students, id);
+                    }
+                }
+                case 7 -> {
+                    System.out.println("Teacher's ID:");
+                    id = sc.nextLine();
+
+                    for (Teacher teacher : teachers) {
+                        contain = teacher.checkId(id);
+                    }
+
+                    if (!contain) {
+                        System.out.println("Teacher's ID not found.");
+                    } else {
+                        for (Teacher teacher : teachers) {
+                            System.out.println(teacher.toString());
+                        }
+                    }
+
+
+                }
+                case 8 -> {
+                    System.out.println("Student's ID:");
+                    id = sc.nextLine();
+
+                    for (Student student : students) {
+                        contain = student.checkId(id);
+                    }
+                    if (!contain) {
+                        System.out.println("Student's ID not found.");
+                    } else {
+                        for (Student student : students) {
+                            System.out.println(student.toString());
+                        }
+                    }
+                }
+                default -> {
+                }
+            }
         } catch (PersonException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    private static void showStudentMenu() {
+        System.out.println("Information to change:");
+        System.out.println("1. Name.");
+        System.out.println("2. Surname.");
+        System.out.println("3. Age.");
+        System.out.println("4. ID.");
+    }
+
+    private static void studentMenu(ArrayList<Student> students, String id) {
+
+        System.out.println("Choose a option:");
+        int opt = Integer.parseInt(sc.nextLine());
+
+        switch (opt) {
+            case 1 -> {
+                System.out.println("New name:");
+                String newName = sc.nextLine();
+                for (Student student : students) {
+                    if (student.checkId(id)) {
+                        student.setName(newName);
+                    }
+                }
+            }
+            case 2 -> {
+                System.out.println("New surname:");
+                String newSurname = sc.nextLine();
+                for (Student student : students) {
+                    if (student.checkId(id)) {
+                        student.setSurname(newSurname);
+                    }
+                }
+            }
+            case 3 -> {
+                System.out.println("New age:");
+                int newAge = Integer.parseInt(sc.nextLine());
+                for (Student student : students) {
+                    if (student.checkId(id)) {
+                        student.setAge(newAge);
+                    }
+                }
+            }
+            case 4 -> {
+                System.out.println("New ID:");
+                String newId = sc.nextLine();
+                for (Student student : students) {
+                    if (student.checkId(id)) {
+                        student.setId(newId);
+                    }
+                }
+            }
+            default -> {
+            }
+        }
+    }
+    private static void showTeacherMenu() {
+        System.out.println("Information to change:");
+        System.out.println("1. Name.");
+        System.out.println("2. Surname.");
+        System.out.println("3. Age.");
+        System.out.println("4. ID.");
+        System.out.println("5. Add student to teacher.");
+        System.out.println("5. Remove student to teacher.");
+    }
+
+    private static void teacherMenu(ArrayList<Teacher> teachers, String id) {
+
+        System.out.println("Choose a option:");
+        int opt = Integer.parseInt(sc.nextLine());
+
+        switch (opt) {
+            case 1 -> {
+                System.out.println("New name:");
+                String newName = sc.nextLine();
+                for (Teacher teacher : teachers) {
+                    if (teacher.checkId(id)) {
+                        teacher.setName(newName);
+                    }
+                }
+            }
+            case 2 -> {
+                System.out.println("New surname:");
+                String newSurname = sc.nextLine();
+                for (Teacher teacher : teachers) {
+                    if (teacher.checkId(id)) {
+                        teacher.setSurname(newSurname);
+                    }
+                }
+            }
+            case 3 -> {
+                System.out.println("New age:");
+                int newAge = Integer.parseInt(sc.nextLine());
+                for (Teacher teacher : teachers) {
+                    if (teacher.checkId(id)) {
+                        teacher.setAge(newAge);
+                    }
+                }
+            }
+            case 4 -> {
+                System.out.println("New ID:");
+                String newId = sc.nextLine();
+                for (Teacher teacher : teachers) {
+                    if (teacher.checkId(id)) {
+                        teacher.setId(newId);
+                    }
+                }
+            }
+            case 5 -> {
+                boolean checked = false;
+
+                System.out.println("Student's ID:");
+                String sId = sc.nextLine();
+
+                for (Teacher teacher : teachers) {
+                    for (int j = 0; j < teacher.getStudentsList().size(); j++) {
+                        if (teacher.getStudentsList().get(j).checkId(id)) {
+                            checked = true;
+                            teacher.addStudent(teacher.getStudentsList().get(j));
+                        }
+                    }
+                }
+
+                if (!checked) {
+                    System.out.println("Student not found.");
+                }
+            }
+            case 6 -> {
+                boolean checked2 = false;
+
+                System.out.println("Student's ID:");
+                String sId = sc.nextLine();
+
+                for (Teacher teacher : teachers) {
+                    for (int j = 0; j < teacher.getStudentsList().size(); j++) {
+                        if (teacher.getStudentsList().get(j).checkId(id)) {
+                            checked2 = true;
+                            teacher.removeStudent(teacher.getStudentsList().get(j));
+                        }
+                    }
+                }
+
+                if (!checked2) {
+                    System.out.println("Student not found.");
+                }
+            }
+            default -> {
+            }
         }
     }
 }

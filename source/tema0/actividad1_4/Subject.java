@@ -1,5 +1,5 @@
 package tema0.actividad1_4;
 
-public enum SubjectArea {
+public enum Subject {
     IT, PHISICS, CHEMISTRY, BIOLOGY, LITERATURE, MATHEMATICS, HISTORY
 }
