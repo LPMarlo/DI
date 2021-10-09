@@ -34,20 +34,11 @@ public abstract class Person {
         return this.id.equals(id);
     }
 
-    @Override
     public String toString() {
         return "ID: " + id +
                 "; Name: " + name +
                 "; Surname: " + surname +
                 "; Age: " + age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
     }
 
     public void setId(String id) {
@@ -65,6 +56,4 @@ public abstract class Person {
     public void setAge(int age) {
         this.age = age;
     }
-
-
 }

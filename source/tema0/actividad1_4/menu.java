@@ -14,24 +14,27 @@ public class menu {
 
         int opt = 0;
 
+        System.out.println("Welcome!\n");
         do {
             showMainMenu();
 
-            System.out.println("Choose a option:");
-            opt = Integer.parseInt(sc.nextLine());
+            try {
+                System.out.println("Choose a option:");
+                opt = Integer.parseInt(sc.nextLine());
 
-            mainMenu(opt, teachers, students);
-
-            if (opt < 1 || opt > 9) {
-                System.out.println("Error. Choose a option between 1 and 6 (included).");
+                mainMenu(opt, teachers, students);
+            } catch (NumberFormatException e){
+                System.out.println("Error. Introduce a number.");
             }
+
+
+
+            if (opt < 1 || opt > 9) System.out.println("Error. Choose a option between 1 and 9.");
+
         } while (opt!=9);
-
-
-
     }
     private static void showMainMenu() {
-        System.out.println("Welcome!\n");
+
         System.out.println("Choose a option:");
         System.out.println("1. Add a teacher.");
         System.out.println("2. Add a student.");
@@ -41,20 +44,21 @@ public class menu {
         System.out.println("6. Change student's information.");
         System.out.println("7. Teacher information.");
         System.out.println("8. Student information.");
+        System.out.println("9. Exit.");
     }
 
     private static void mainMenu(int opt, ArrayList<Teacher> teachers, ArrayList<Student> students) {
-        String id = "";
-        String name = "";
-        String surname = "";
-        int age = 0;
+        String id;
+        String name;
+        String surname;
+        int age;
         boolean contain = false;
 
         try {
             switch (opt) {
                 case 1 -> {
                     System.out.println("ID: ");
-                    id = sc.nextLine();
+                    id = sc.nextLine().toUpperCase();
 
                     System.out.println("Name: ");
                     name = sc.nextLine();
@@ -68,11 +72,11 @@ public class menu {
                     System.out.println("Department: ");
                     String depart = sc.nextLine();
 
-                    teachers.add(new Teacher(id, name, surname, age, Departament.valueOf(depart)));
+                    teachers.add(new Teacher(id, name, surname, age, Department.valueOf(depart)));
                 }
                 case 2 -> {
                     System.out.println("ID: ");
-                    id = sc.nextLine();
+                    id = sc.nextLine().toUpperCase();
 
                     System.out.println("Name: ");
                     name = sc.nextLine();
@@ -92,10 +96,10 @@ public class menu {
                     int numSubjects = Integer.parseInt(sc.nextLine());
 
                     if (numSubjects != 0) {
-                        System.out.println("Subjects: IT, PHISICS, CHEMISTRY, BIOLOGY, LITERATURE, MATHEMATICS, HISTORY");
+                        System.out.println("Subjects: IT, PHYSICS, CHEMISTRY, BIOLOGY, LITERATURE, MATHEMATICS, HISTORY");
 
                         for (int i = 0; i < numSubjects; i++) {
-                            String subject = "";
+                            String subject;
                             System.out.println("Subject [" + (i + 1) + "]: ");
                             subject = sc.nextLine();
 
@@ -105,8 +109,8 @@ public class menu {
                     students.add(s);
                 }
                 case 3 -> {
-                    System.out.println("Introduce the teacher's ID: ");
-                    id = sc.nextLine();
+                    System.out.println("Teacher's ID: ");
+                    id = sc.nextLine().toUpperCase();
 
                     for (int i = 0; i < teachers.size(); i++) {
                         if (teachers.get(i).checkId(id)) {
@@ -121,8 +125,8 @@ public class menu {
                     }
                 }
                 case 4 -> {
-                    System.out.println("Introduce the student's ID: ");
-                    id = sc.nextLine();
+                    System.out.println("Student's ID: ");
+                    id = sc.nextLine().toUpperCase();
 
                     for (int i = 0; i < students.size(); i++) {
                         if (students.get(i).checkId(id)) {
@@ -138,7 +142,7 @@ public class menu {
                 }
                 case 5 -> {
                     System.out.println("Teacher's ID:");
-                    id = sc.nextLine();
+                    id = sc.nextLine().toUpperCase();
 
                     for (Teacher teacher : teachers) {
                         contain = teacher.checkId(id);
@@ -147,13 +151,22 @@ public class menu {
                     if (!contain) {
                         System.out.println("Teacher's ID not found.");
                     } else {
-                        showTeacherMenu();
-                        teacherMenu(teachers, id);
+                        int teacherOpt;
+                        do {
+                            System.out.println("Choose a option:");
+                            teacherOpt = Integer.parseInt(sc.nextLine());
+
+                            showTeacherMenu();
+                            teacherMenu(teachers, id, opt);
+
+                            if (teacherOpt < 1 || teacherOpt > 7) System.out.println("Error. Choose a option between 1 and 7.");
+
+                        } while (teacherOpt!=7);
                     }
                 }
                 case 6 -> {
                     System.out.println("Student's ID:");
-                    id = sc.nextLine();
+                    id = sc.nextLine().toUpperCase();
 
                     for (Student student : students) {
                         contain = student.checkId(id);
@@ -162,13 +175,22 @@ public class menu {
                     if (!contain) {
                         System.out.println("Student's ID not found.");
                     } else {
-                        showStudentMenu();
-                        studentMenu(students, id);
+                        int studentOpt;
+                        do {
+                            System.out.println("Choose a option:");
+                            studentOpt = Integer.parseInt(sc.nextLine());
+
+                            showStudentMenu();
+                            studentMenu(students, id, studentOpt);
+
+                            if (studentOpt < 1 || studentOpt > 5) System.out.println("Error. Choose a option between 1 and 5.");
+
+                        } while (studentOpt!=5);
                     }
                 }
                 case 7 -> {
                     System.out.println("Teacher's ID:");
-                    id = sc.nextLine();
+                    id = sc.nextLine().toUpperCase();
 
                     for (Teacher teacher : teachers) {
                         contain = teacher.checkId(id);
@@ -186,7 +208,7 @@ public class menu {
                 }
                 case 8 -> {
                     System.out.println("Student's ID:");
-                    id = sc.nextLine();
+                    id = sc.nextLine().toUpperCase();
 
                     for (Student student : students) {
                         contain = student.checkId(id);
@@ -213,17 +235,15 @@ public class menu {
         System.out.println("2. Surname.");
         System.out.println("3. Age.");
         System.out.println("4. ID.");
+        System.out.println("5. Exit.");
     }
 
-    private static void studentMenu(ArrayList<Student> students, String id) {
-
-        System.out.println("Choose a option:");
-        int opt = Integer.parseInt(sc.nextLine());
-
+    private static void studentMenu(ArrayList<Student> students, String id, int opt) {
         switch (opt) {
             case 1 -> {
                 System.out.println("New name:");
                 String newName = sc.nextLine();
+
                 for (Student student : students) {
                     if (student.checkId(id)) {
                         student.setName(newName);
@@ -233,6 +253,7 @@ public class menu {
             case 2 -> {
                 System.out.println("New surname:");
                 String newSurname = sc.nextLine();
+
                 for (Student student : students) {
                     if (student.checkId(id)) {
                         student.setSurname(newSurname);
@@ -242,6 +263,7 @@ public class menu {
             case 3 -> {
                 System.out.println("New age:");
                 int newAge = Integer.parseInt(sc.nextLine());
+
                 for (Student student : students) {
                     if (student.checkId(id)) {
                         student.setAge(newAge);
@@ -250,7 +272,8 @@ public class menu {
             }
             case 4 -> {
                 System.out.println("New ID:");
-                String newId = sc.nextLine();
+                String newId = sc.nextLine().toUpperCase();
+
                 for (Student student : students) {
                     if (student.checkId(id)) {
                         student.setId(newId);
@@ -268,14 +291,11 @@ public class menu {
         System.out.println("3. Age.");
         System.out.println("4. ID.");
         System.out.println("5. Add student to teacher.");
-        System.out.println("5. Remove student to teacher.");
+        System.out.println("6. Remove student to teacher.");
+        System.out.println("7. Exit.");
     }
 
-    private static void teacherMenu(ArrayList<Teacher> teachers, String id) {
-
-        System.out.println("Choose a option:");
-        int opt = Integer.parseInt(sc.nextLine());
-
+    private static void teacherMenu(ArrayList<Teacher> teachers, String id, int opt) {
         switch (opt) {
             case 1 -> {
                 System.out.println("New name:");
@@ -306,7 +326,7 @@ public class menu {
             }
             case 4 -> {
                 System.out.println("New ID:");
-                String newId = sc.nextLine();
+                String newId = sc.nextLine().toUpperCase();
                 for (Teacher teacher : teachers) {
                     if (teacher.checkId(id)) {
                         teacher.setId(newId);
@@ -317,7 +337,7 @@ public class menu {
                 boolean checked = false;
 
                 System.out.println("Student's ID:");
-                String sId = sc.nextLine();
+                id = sc.nextLine().toUpperCase();
 
                 for (Teacher teacher : teachers) {
                     for (int j = 0; j < teacher.getStudentsList().size(); j++) {
@@ -336,7 +356,7 @@ public class menu {
                 boolean checked2 = false;
 
                 System.out.println("Student's ID:");
-                String sId = sc.nextLine();
+                id = sc.nextLine().toUpperCase();
 
                 for (Teacher teacher : teachers) {
                     for (int j = 0; j < teacher.getStudentsList().size(); j++) {

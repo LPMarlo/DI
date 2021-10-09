@@ -15,12 +15,10 @@ public class Student extends Person {
 
     public void addSubject(Subject subject) throws PersonException {
          if (!subjects.add(subject)) throw new PersonException("Incorrect Subject.");
-
          subjects.add(subject);
     }
 
-    @Override
     public String toString() {
-        return super.toString();
+        return super.toString() + "; Enrollment: " + enrollment;
     }
 }
