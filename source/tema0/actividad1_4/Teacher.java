@@ -2,7 +2,7 @@ package tema0.actividad1_4;
 
 import java.util.ArrayList;
 
-public class Teacher extends Person{
+public class Teacher extends Person {
 
     ArrayList<Student> studentsList;
     private Department department;
@@ -26,6 +26,6 @@ public class Teacher extends Person{
     }
 
     public String toString() {
-        return super.toString() + "; Department" + department.toString();
+        return super.toString() + "; Department: " + department.toString();
     }
 }

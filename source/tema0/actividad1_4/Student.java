@@ -11,11 +11,12 @@ public class Student extends Person {
     public Student(String id, String name, String surname, int age, String enrollment) throws PersonException {
         super(id, name, surname, age);
         subjects = new ArrayList<>();
+        this.enrollment = enrollment;
     }
 
     public void addSubject(Subject subject) throws PersonException {
-         if (!subjects.add(subject)) throw new PersonException("Incorrect Subject.");
-         subjects.add(subject);
+        if (!subjects.add(subject)) throw new PersonException("Incorrect Subject.");
+        subjects.add(subject);
     }
 
     public String toString() {

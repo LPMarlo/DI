@@ -9,9 +9,11 @@ public class menu {
 
     public static void main(String[] args) {
 
+        //LISTS
         ArrayList<Teacher> teachers = new ArrayList<>();
         ArrayList<Student> students = new ArrayList<>();
 
+        //VARIABLES
         int opt = 0;
 
         System.out.println("Welcome!\n");
@@ -23,18 +25,19 @@ public class menu {
                 opt = Integer.parseInt(sc.nextLine());
 
                 mainMenu(opt, teachers, students);
-            } catch (NumberFormatException e){
-                System.out.println("Error. Introduce a number.");
+            } catch (NumberFormatException e) {
+                System.out.println("Error. Enter a number.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error. Incorrect Word.");
             }
-
-
 
             if (opt < 1 || opt > 9) System.out.println("Error. Choose a option between 1 and 9.");
 
-        } while (opt!=9);
+        } while (opt != 9);
     }
-    private static void showMainMenu() {
 
+    //MAIN MENU
+    private static void showMainMenu() {
         System.out.println("Choose a option:");
         System.out.println("1. Add a teacher.");
         System.out.println("2. Add a student.");
@@ -48,12 +51,15 @@ public class menu {
     }
 
     private static void mainMenu(int opt, ArrayList<Teacher> teachers, ArrayList<Student> students) {
+
+        //VARIABLES
         String id;
         String name;
         String surname;
         int age;
         boolean contain = false;
 
+        //MENU
         try {
             switch (opt) {
                 case 1 -> {
@@ -70,7 +76,7 @@ public class menu {
                     age = Integer.parseInt(sc.nextLine());
 
                     System.out.println("Department: ");
-                    String depart = sc.nextLine();
+                    String depart = sc.nextLine().toUpperCase();
 
                     teachers.add(new Teacher(id, name, surname, age, Department.valueOf(depart)));
                 }
@@ -100,8 +106,8 @@ public class menu {
 
                         for (int i = 0; i < numSubjects; i++) {
                             String subject;
-                            System.out.println("Subject [" + (i + 1) + "]: ");
-                            subject = sc.nextLine();
+                            System.out.println("Subject " + (numSubjects - i) + ": ");
+                            subject = sc.nextLine().toUpperCase();
 
                             s.addSubject(Subject.valueOf(subject));
                         }
@@ -153,15 +159,17 @@ public class menu {
                     } else {
                         int teacherOpt;
                         do {
+                            showTeacherMenu();
+
                             System.out.println("Choose a option:");
                             teacherOpt = Integer.parseInt(sc.nextLine());
 
-                            showTeacherMenu();
-                            teacherMenu(teachers, id, opt);
-
-                            if (teacherOpt < 1 || teacherOpt > 7) System.out.println("Error. Choose a option between 1 and 7.");
-
-                        } while (teacherOpt!=7);
+                            if (teacherOpt < 1 || teacherOpt > 7) {
+                                System.out.println("Error. Choose a option between 1 and 7.");
+                            } else if (teacherOpt != 7) {
+                                teacherMenu(teachers, students, id, opt);
+                            }
+                        } while (teacherOpt != 7);
                     }
                 }
                 case 6 -> {
@@ -177,15 +185,17 @@ public class menu {
                     } else {
                         int studentOpt;
                         do {
+                            showStudentMenu();
+
                             System.out.println("Choose a option:");
                             studentOpt = Integer.parseInt(sc.nextLine());
 
-                            showStudentMenu();
-                            studentMenu(students, id, studentOpt);
-
-                            if (studentOpt < 1 || studentOpt > 5) System.out.println("Error. Choose a option between 1 and 5.");
-
-                        } while (studentOpt!=5);
+                            if (studentOpt < 1 || studentOpt > 5) {
+                                System.out.println("Error. Choose a option between 1 and 5.");
+                            } else if (studentOpt != 5) {
+                                studentMenu(students, id, studentOpt);
+                            }
+                        } while (studentOpt != 5);
                     }
                 }
                 case 7 -> {
@@ -229,6 +239,7 @@ public class menu {
         }
     }
 
+    //STUDENT
     private static void showStudentMenu() {
         System.out.println("Information to change:");
         System.out.println("1. Name.");
@@ -280,10 +291,10 @@ public class menu {
                     }
                 }
             }
-            default -> {
-            }
         }
     }
+
+    //TEACHER
     private static void showTeacherMenu() {
         System.out.println("Information to change:");
         System.out.println("1. Name.");
@@ -295,7 +306,7 @@ public class menu {
         System.out.println("7. Exit.");
     }
 
-    private static void teacherMenu(ArrayList<Teacher> teachers, String id, int opt) {
+    private static void teacherMenu(ArrayList<Teacher> teachers, ArrayList<Student> students, String id, int opt) {
         switch (opt) {
             case 1 -> {
                 System.out.println("New name:");
@@ -339,11 +350,11 @@ public class menu {
                 System.out.println("Student's ID:");
                 id = sc.nextLine().toUpperCase();
 
-                for (Teacher teacher : teachers) {
-                    for (int j = 0; j < teacher.getStudentsList().size(); j++) {
-                        if (teacher.getStudentsList().get(j).checkId(id)) {
+                for (Student student : students) {
+                    for (Teacher teacher : teachers) {
+                        if ((!teacher.getStudentsList().contains(student)) && students.contains(student) && student.checkId(id)) {
                             checked = true;
-                            teacher.addStudent(teacher.getStudentsList().get(j));
+                            teacher.addStudent(student);
                         }
                     }
                 }
@@ -358,11 +369,11 @@ public class menu {
                 System.out.println("Student's ID:");
                 id = sc.nextLine().toUpperCase();
 
-                for (Teacher teacher : teachers) {
-                    for (int j = 0; j < teacher.getStudentsList().size(); j++) {
-                        if (teacher.getStudentsList().get(j).checkId(id)) {
+                for (Student student : students) {
+                    for (Teacher teacher : teachers) {
+                        if ((!teacher.getStudentsList().contains(student)) && students.contains(student) && student.checkId(id)) {
                             checked2 = true;
-                            teacher.removeStudent(teacher.getStudentsList().get(j));
+                            teacher.removeStudent(student);
                         }
                     }
                 }
@@ -370,8 +381,6 @@ public class menu {
                 if (!checked2) {
                     System.out.println("Student not found.");
                 }
-            }
-            default -> {
             }
         }
     }

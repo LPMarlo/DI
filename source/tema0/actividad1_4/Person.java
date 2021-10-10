@@ -14,9 +14,14 @@ public abstract class Person {
         checkAge(age);
     }
 
-    private void checkIdFormat(String id) throws PersonException{
-        if (!(id.length()==9 || Character.isLetter(id.indexOf(8)))) {
-            for (int i = 0; i < id.length()-1; i++) {
+    /**
+     * ID FORMAT: 8 numbers and 1 letter
+     * @param id
+     * @throws PersonException
+     */
+    private void checkIdFormat(String id) throws PersonException {
+        if (!(id.length() == 9 || Character.isLetter(id.indexOf(8)))) {
+            for (int i = 0; i < id.length() - 1; i++) {
                 if (!Character.isDigit(id.indexOf(i))) {
                     throw new PersonException("Incorrect ID.");
                 }
@@ -26,7 +31,7 @@ public abstract class Person {
     }
 
     private void checkAge(int age) throws PersonException {
-        if (age<0) throw new PersonException("Incorrect Age.");
+        if (age < 0 || age > 100) throw new PersonException("Incorrect Age.");
         this.age = age;
     }
 
