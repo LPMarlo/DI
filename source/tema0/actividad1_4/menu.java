@@ -21,7 +21,7 @@ public class menu {
             showMainMenu();
 
             try {
-                System.out.println("Choose a option:");
+                System.out.println("Choose an option:");
                 opt = Integer.parseInt(sc.nextLine());
 
                 mainMenu(opt, teachers, students);
@@ -31,14 +31,14 @@ public class menu {
                 System.out.println("Error. Incorrect Word.");
             }
 
-            if (opt < 1 || opt > 9) System.out.println("Error. Choose a option between 1 and 9.");
+            if (opt < 1 || opt > 9) System.out.println("Error. Choose an option between 1 and 9.");
 
         } while (opt != 9);
     }
 
     //MAIN MENU
     private static void showMainMenu() {
-        System.out.println("Choose a option:");
+        System.out.println("Choose an option:");
         System.out.println("1. Add a teacher.");
         System.out.println("2. Add a student.");
         System.out.println("3. Remove a teacher.");
@@ -161,11 +161,11 @@ public class menu {
                         do {
                             showTeacherMenu();
 
-                            System.out.println("Choose a option:");
+                            System.out.println("Choose an option:");
                             teacherOpt = Integer.parseInt(sc.nextLine());
 
                             if (teacherOpt < 1 || teacherOpt > 7) {
-                                System.out.println("Error. Choose a option between 1 and 7.");
+                                System.out.println("Error. Choose an option between 1 and 7.");
                             } else if (teacherOpt != 7) {
                                 teacherMenu(teachers, students, id, opt);
                             }
@@ -187,11 +187,11 @@ public class menu {
                         do {
                             showStudentMenu();
 
-                            System.out.println("Choose a option:");
+                            System.out.println("Choose an option:");
                             studentOpt = Integer.parseInt(sc.nextLine());
 
                             if (studentOpt < 1 || studentOpt > 5) {
-                                System.out.println("Error. Choose a option between 1 and 5.");
+                                System.out.println("Error. Choose an option between 1 and 5.");
                             } else if (studentOpt != 5) {
                                 studentMenu(students, id, studentOpt);
                             }
