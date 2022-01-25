@@ -40,9 +40,11 @@ class AlumnoTest {
         assertNotEquals(modulos2, a.getMatricula());
     }
 
+    /**
+     * Test para comprobar que el método toStringXML() lo devuelve en el formato deseado.
+     */
     @Test
     void toStringXML() {
-        // prueba
         ModuloProfesional mp = new ModuloProfesional(150, "Desarrollo de Interfaces");
         ModuloProfesional mp2 = new ModuloProfesional(180, "Acceso a Datos");
         List<ModuloProfesional> modulos = List.of(mp, mp2);

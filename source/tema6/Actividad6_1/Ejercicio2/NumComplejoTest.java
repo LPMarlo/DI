@@ -30,5 +30,6 @@ class NumComplejoTest {
         NumComplejo b = new NumComplejo(3, 4);
         NumComplejo c = new NumComplejo((float) 0.44, (float) 0.08);
         assertEquals(c, a.dividir(b));
+
     }
 }
