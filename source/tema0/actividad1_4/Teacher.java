@@ -6,7 +6,7 @@ public class Teacher extends Person {
 
     ArrayList<Student> studentsList;
     private Department department;
-
+    
     public Teacher(String id, String name, String surname, int age, Department department) throws PersonException {
         super(id, name, surname, age);
         this.department = department;

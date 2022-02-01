@@ -4,7 +4,13 @@ import java.util.ArrayList;
 
 public class Student extends Person {
 
+    /**
+     * Matrícula del alumno.
+     */
     private String enrollment;
+    /**
+     * Asignaturas.
+     */
     private ArrayList<Subject> subjects;
 
 

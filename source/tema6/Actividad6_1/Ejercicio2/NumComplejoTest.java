@@ -28,7 +28,7 @@ class NumComplejoTest {
     void dividir() {
         NumComplejo a = new NumComplejo(1, 2);
         NumComplejo b = new NumComplejo(3, 4);
-        NumComplejo c = new NumComplejo((float) 0.44, (float) 0.08);
+        NumComplejo c = new NumComplejo(0.44f, 0.08f);
         assertEquals(c, a.dividir(b));
 
     }

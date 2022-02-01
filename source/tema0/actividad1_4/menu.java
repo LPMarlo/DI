@@ -9,7 +9,7 @@ public class menu {
 
     public static void main(String[] args) {
 
-        //LISTS
+        //LISTAS
         ArrayList<Teacher> teachers = new ArrayList<>();
         ArrayList<Student> students = new ArrayList<>();
 
@@ -36,7 +36,9 @@ public class menu {
         } while (opt != 9);
     }
 
-    //MAIN MENU
+    /**
+     * Muestra el menú principal.
+     */
     private static void showMainMenu() {
         System.out.println("Choose an option:");
         System.out.println("1. Add a teacher.");
@@ -50,6 +52,12 @@ public class menu {
         System.out.println("9. Exit.");
     }
 
+    /**
+     * Contiene toda la lógica de las opciones.
+     * @param opt
+     * @param teachers
+     * @param students
+     */
     private static void mainMenu(int opt, ArrayList<Teacher> teachers, ArrayList<Student> students) {
 
         //VARIABLES
@@ -239,7 +247,9 @@ public class menu {
         }
     }
 
-    //STUDENT
+    /**
+     * Muestra el submenú de los datos de un estudiante.
+     */
     private static void showStudentMenu() {
         System.out.println("Information to change:");
         System.out.println("1. Name.");
