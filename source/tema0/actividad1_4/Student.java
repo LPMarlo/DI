@@ -14,12 +14,26 @@ public class Student extends Person {
     private ArrayList<Subject> subjects;
 
 
+    /**
+     * Constructor
+     * @param id
+     * @param name
+     * @param surname
+     * @param age
+     * @param enrollment
+     * @throws PersonException
+     */
     public Student(String id, String name, String surname, int age, String enrollment) throws PersonException {
         super(id, name, surname, age);
         subjects = new ArrayList<>();
         this.enrollment = enrollment;
     }
 
+    /**
+     * Añadir asignatura.
+     * @param subject
+     * @throws PersonException
+     */
     public void addSubject(Subject subject) throws PersonException {
         if (!subjects.add(subject)) throw new PersonException("Incorrect Subject.");
         subjects.add(subject);

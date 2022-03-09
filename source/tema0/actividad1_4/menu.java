@@ -248,7 +248,7 @@ public class menu {
     }
 
     /**
-     * Muestra el submenú de los datos de un estudiante.
+     * Muestra el submenú con los datos del estudiante que se pueden cambiar.
      */
     private static void showStudentMenu() {
         System.out.println("Information to change:");
@@ -259,6 +259,12 @@ public class menu {
         System.out.println("5. Exit.");
     }
 
+    /**
+     * Contiene la lógica para cambiar el dato seleccionado.
+     * @param students
+     * @param id
+     * @param opt
+     */
     private static void studentMenu(ArrayList<Student> students, String id, int opt) {
         switch (opt) {
             case 1 -> {
@@ -304,7 +310,9 @@ public class menu {
         }
     }
 
-    //TEACHER
+    /**
+     * Muestra el submenú con los datos del profesor que se pueden cambiar.
+     */
     private static void showTeacherMenu() {
         System.out.println("Information to change:");
         System.out.println("1. Name.");
@@ -316,6 +324,13 @@ public class menu {
         System.out.println("7. Exit.");
     }
 
+    /**
+     * Contiene la lógica para cambiar el dato seleccionado.
+     * @param teachers
+     * @param students
+     * @param id
+     * @param opt
+     */
     private static void teacherMenu(ArrayList<Teacher> teachers, ArrayList<Student> students, String id, int opt) {
         switch (opt) {
             case 1 -> {

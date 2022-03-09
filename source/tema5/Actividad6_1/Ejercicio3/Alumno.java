@@ -1,4 +1,4 @@
-package tema6.Actividad6_1.Ejercicio3;
+package tema5.Actividad6_1.Ejercicio3;
 
 import java.io.Serializable;
 import java.util.Date;

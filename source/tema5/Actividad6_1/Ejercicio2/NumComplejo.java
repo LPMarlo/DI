@@ -1,4 +1,4 @@
-package tema6.Actividad6_1.Ejercicio2;
+package tema5.Actividad6_1.Ejercicio2;
 
 /**
  * Clase que representa un número complejo

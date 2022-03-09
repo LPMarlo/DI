@@ -1,4 +1,4 @@
-package tema6.Actividad6_1.Ejercicio1;
+package tema5.Actividad6_1.Ejercicio1;
 
 import org.junit.jupiter.api.Test;
 
